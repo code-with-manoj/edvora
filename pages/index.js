@@ -7,14 +7,6 @@ import axios from "axios";
 export default function Home(props) {
   const [filter, setFilter] = useState(false);
   const [tab, setTab] = useState(0);
-  const [user, setUser] = useState("");
-  // FOr Navmenu
-  const pastArray = [];
-  const upcomingArray = [];
-  const nearestArray = [];
-
-  const data = props.data;
-  const [tabData, setTabdata] = useState(nearestArray);
   const res = async () => {
     const res = await axios.get("https://assessment.api.vweb.app/user");
     setUser(res.data);
@@ -26,11 +18,17 @@ export default function Home(props) {
     };
   }, []);
 
+  const [user, setUser] = useState("");
+
   // // For filter
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   // console.log(city, state);
-
+  const data = props.data;
+  const pastArray = [];
+  const upcomingArray = [];
+  const nearestArray = [];
+  // for upcoming & past
   data?.map((item) => {
     if (new Date() > new Date(item.date)) {
       pastArray.push(item);
@@ -38,15 +36,14 @@ export default function Home(props) {
       upcomingArray.push(item);
     }
   });
-
   // For nearest
   data?.map((item) => {
-    // return console.log(item);
     if (item.station_path.includes(user?.station_code)) {
       nearestArray.push(item);
     }
   });
-
+  const [tabData, setTabdata] = useState(nearestArray);
+  // console.log(tabData);
   return (
     <div>
       <Head>
@@ -78,7 +75,7 @@ export default function Home(props) {
 
       <section className="bg-[#292929] text-white">
         {/* Top Menu */}
-        <div className="container  mx-auto sticky top-0 left-0 z-20 bg-[#292929] p-4 justify-between flex items-center">
+        <div className="container  mx-auto sticky top-0 left-0 z-20 bg-[#292929] p-4 pb-0 justify-between flex items-center">
           <nav className="md:space-x-10 space-x-3 sm:space-x-6">
             <span
               onClick={() => {
@@ -192,7 +189,7 @@ export default function Home(props) {
         </div>
 
         {/* Main Section */}
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto pt-0 p-4">
           {tabData.map((items, i) => {
             if (city !== "" || state !== "") {
               if (city !== items.city || state !== items.state) {
@@ -202,7 +199,7 @@ export default function Home(props) {
             return (
               <div
                 key={i}
-                className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
+                className="rounded-md p-4 my-5 bg-[#171717] flex md:flex-row flex-col items-center"
               >
                 <figure className="md:w-1/4 md:h-40 ">
                   <img
@@ -267,6 +264,7 @@ export default function Home(props) {
 export async function getStaticProps() {
   const res = await fetch("https://assessment.api.vweb.app/rides");
   const data = await res.json();
+  console.log(data, "lorem1011111000");
 
   return {
     props: { data }, // will be passed to the page component as props
