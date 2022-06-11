@@ -8,6 +8,13 @@ export default function Home(props) {
   const [filter, setFilter] = useState(false);
   const [tab, setTab] = useState(0);
   const [user, setUser] = useState("");
+  // FOr Navmenu
+  const pastArray = [];
+  const upcomingArray = [];
+  const nearestArray = [];
+
+  const data = props.data;
+  const [tabData, setTabdata] = useState(nearestArray);
   const res = async () => {
     const res = await axios.get("https://assessment.api.vweb.app/user");
     setUser(res.data);
@@ -24,13 +31,6 @@ export default function Home(props) {
   const [state, setState] = useState("");
   // console.log(city, state);
 
-  // FOr Navmenu
-  const pastArray = [];
-  const upcomingArray = [];
-  const nearestArray = [];
-
-  const data = props.data;
-
   data?.map((item) => {
     if (new Date() > new Date(item.date)) {
       pastArray.push(item);
@@ -46,303 +46,6 @@ export default function Home(props) {
       nearestArray.push(item);
     }
   });
-
-  const renderCards = () => {
-    switch (tab) {
-      case 0:
-        return (
-          <div className="container mx-auto p-4">
-            {nearestArray.map((items, i) => {
-              if (city !== "" || state !== "") {
-                if (city !== items.city || state !== items.state) {
-                  return;
-                }
-              }
-              return (
-                <div
-                  key={i}
-                  className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-                >
-                  <figure className="md:w-1/4 md:h-40 ">
-                    <img
-                      src={items.map_url}
-                      className="w-full h-full object-cover"
-                    />
-                  </figure>
-                  <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                    <div className="md:pl-7 md:space-y-1 h-full ">
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Ride Id : <span className="text-white">{items.id}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Origin State :{" "}
-                        <span className="text-white">
-                          {items.origin_station_code}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Station Path :{" "}
-                        <span className="text-white">
-                          {" "}
-                          [
-                          {items.station_path.map((e, i) => {
-                            return (
-                              <span key={i} className="">
-                                {e},&nbsp;
-                              </span>
-                            );
-                          })}
-                          ]{" "}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Date : <span className="text-white">{items.date}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Distance :{" "}
-                        <span className="text-white">
-                          {items.destination_station_code -
-                            items.origin_station_code}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.city}
-                      </div>
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.state}
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              );
-            })}
-          </div>
-        );
-        break;
-      case 1:
-        return (
-          <div className="container mx-auto p-4">
-            {upcomingArray.map((items, i) => {
-              if (city !== "" || state !== "") {
-                if (city !== items.city || state !== items.state) {
-                  return;
-                }
-              }
-              return (
-                <div
-                  key={i}
-                  className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-                >
-                  <figure className="md:w-1/4 md:h-40 ">
-                    <img
-                      src={items.map_url}
-                      className="w-full h-full object-cover"
-                    />
-                  </figure>
-                  <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                    <div className="md:pl-7 md:space-y-1 h-full ">
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Ride Id : <span className="text-white">{items.id}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Origin State :{" "}
-                        <span className="text-white">
-                          {items.origin_station_code}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Station Path :{" "}
-                        <span className="text-white">
-                          <span className="text-white">
-                            {" "}
-                            [
-                            {items.station_path.map((e) => {
-                              return <span className="">{e},&nbsp;</span>;
-                            })}
-                            ]{" "}
-                          </span>
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Date : <span className="text-white">{items.date}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Distance :{" "}
-                        <span className="text-white">
-                          {items.destination_station_code -
-                            items.origin_station_code}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.city}
-                      </div>
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.state}
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              );
-            })}
-          </div>
-        );
-        break;
-      case 2:
-        return (
-          <div className="container mx-auto p-4">
-            {pastArray.map((items, i) => {
-              if (city !== "" || state !== "") {
-                if (city !== items.city || state !== items.state) {
-                  return;
-                } else {
-                  console.log(items.city, items.state, "hhj");
-                }
-              }
-
-              return (
-                <div
-                  key={i}
-                  className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-                >
-                  <figure className="md:w-1/4 md:h-40 ">
-                    <img
-                      src={items.map_url}
-                      className="w-full h-full object-cover"
-                    />
-                  </figure>
-                  <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                    <div className="md:pl-7 md:space-y-1 h-full ">
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Ride Id : <span className="text-white">{items.id}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Origin State :{" "}
-                        <span className="text-white">
-                          {items.origin_station_code}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Station Path :{" "}
-                        <span className="text-white">
-                          <span className="text-white">
-                            {" "}
-                            [
-                            {items.station_path.map((e, i) => {
-                              return (
-                                <span key={i} className="">
-                                  {e},&nbsp;
-                                </span>
-                              );
-                            })}
-                            ]{" "}
-                          </span>
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Date : <span className="text-white">{items.date}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Distance :{" "}
-                        <span className="text-white">
-                          {items.destination_station_code -
-                            items.origin_station_code}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.city}
-                      </div>
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.state}
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              );
-            })}
-          </div>
-        );
-        break;
-
-      default:
-        return (
-          <div className="container mx-auto p-4">
-            {nearestArray.map((items, i) => {
-              if (city !== "" || state !== "") {
-                if (city !== items.city || state !== items.state) {
-                  return;
-                }
-              }
-              return (
-                <div
-                  key={i}
-                  className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-                >
-                  <figure className="md:w-1/4 md:h-40 ">
-                    <img
-                      src={items.map_url}
-                      className="w-full h-full object-cover"
-                    />
-                  </figure>
-                  <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                    <div className="md:pl-7 md:space-y-1 h-full ">
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Ride Id : <span className="text-white">{items.id}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Origin State :{" "}
-                        <span className="text-white">
-                          {items.origin_station_code}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Station Path :{" "}
-                        <span className="text-white">
-                          {" "}
-                          [
-                          {items.station_path.map((e, i) => {
-                            return (
-                              <span key={i} className="">
-                                {e},&nbsp;
-                              </span>
-                            );
-                          })}
-                          ]{" "}
-                        </span>
-                      </div>{" "}
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Date : <span className="text-white">{items.date}</span>
-                      </div>
-                      <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                        Distance :{" "}
-                        <span className="text-white">
-                          {items.destination_station_code -
-                            items.origin_station_code}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.city}
-                      </div>
-                      <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                        {items.state}
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              );
-            })}
-          </div>
-        );
-        break;
-    }
-  };
 
   return (
     <div>
@@ -378,7 +81,10 @@ export default function Home(props) {
         <div className="container  mx-auto sticky top-0 left-0 z-20 bg-[#292929] p-4 justify-between flex items-center">
           <nav className="md:space-x-10 space-x-3 sm:space-x-6">
             <span
-              onClick={() => setTab(0)}
+              onClick={() => {
+                setTab(0);
+                setTabdata(nearestArray);
+              }}
               className={
                 tab === 0
                   ? "sm:tracking-wider tracking-wide sm:text-base text-xs activeNav py-1 cursor-pointer"
@@ -389,7 +95,10 @@ export default function Home(props) {
             </span>
 
             <span
-              onClick={() => setTab(1)}
+              onClick={() => {
+                setTab(1);
+                setTabdata(upcomingArray);
+              }}
               className={
                 tab === 1
                   ? "tracking-wider sm:text-base text-sm activeNav py-1 cursor-pointer"
@@ -400,7 +109,10 @@ export default function Home(props) {
             </span>
 
             <span
-              onClick={() => setTab(2)}
+              onClick={() => {
+                setTab(2);
+                setTabdata(pastArray);
+              }}
               className={
                 tab === 2
                   ? "tracking-wider sm:text-base text-sm activeNav py-1 cursor-pointer"
@@ -478,8 +190,76 @@ export default function Home(props) {
             </div>
           </div>
         </div>
+
         {/* Main Section */}
-        {renderCards()}
+        <div className="container mx-auto p-4">
+          {tabData.map((items, i) => {
+            if (city !== "" || state !== "") {
+              if (city !== items.city || state !== items.state) {
+                return;
+              }
+            }
+            return (
+              <div
+                key={i}
+                className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
+              >
+                <figure className="md:w-1/4 md:h-40 ">
+                  <img
+                    src={items.map_url}
+                    className="w-full h-full object-cover"
+                  />
+                </figure>
+                <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
+                  <div className="md:pl-7 md:space-y-1 h-full ">
+                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+                      Ride Id : <span className="text-white">{items.id}</span>
+                    </div>
+                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+                      Origin State :{" "}
+                      <span className="text-white">
+                        {items.origin_station_code}
+                      </span>
+                    </div>{" "}
+                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+                      Station Path :{" "}
+                      <span className="text-white">
+                        {" "}
+                        [
+                        {items.station_path.map((e, i) => {
+                          return (
+                            <span key={i} className="">
+                              {e},&nbsp;
+                            </span>
+                          );
+                        })}
+                        ]{" "}
+                      </span>
+                    </div>{" "}
+                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+                      Date : <span className="text-white">{items.date}</span>
+                    </div>
+                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+                      Distance :{" "}
+                      <span className="text-white">
+                        {items.destination_station_code -
+                          items.origin_station_code}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
+                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+                      {items.city}
+                    </div>
+                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+                      {items.state}
+                    </div>
+                  </div>
+                </section>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </div>
   );
