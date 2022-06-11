@@ -47,7 +47,6 @@ export default function Home(props) {
     }
   });
 
-  // // Render Cards
   // const renderCards = () => {
   //   if (tab === 0) {
   //     return (
@@ -305,8 +304,8 @@ export default function Home(props) {
               onClick={() => setTab(0)}
               className={
                 tab === 0
-                  ? "tracking-wider sm:text-base text-sm activeNav py-1 cursor-pointer"
-                  : "tracking-wider sm:text-base text-sm text-gray-300 py-1 cursor-pointer"
+                  ? "sm:tracking-wider tracking-wide sm:text-base text-xs activeNav py-1 cursor-pointer"
+                  : "sm:tracking-wider tracking-wide sm:text-base text-xs text-gray-300 py-1 cursor-pointer"
               }
             >
               Nearest rides ({nearestArray.length})
