@@ -47,226 +47,226 @@ export default function Home(props) {
     }
   });
 
-  // Render Cards
-  const renderCards = () => {
-    if (tab === 0) {
-      return (
-        <div className="container mx-auto p-4">
-          {nearestArray.map((items, i) => {
-            if (city !== "" || state !== "") {
-              if (city !== items.city || state !== items.state) {
-                return;
-              }
-            }
-            return (
-              <div
-                key={i}
-                className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-              >
-                <figure className="md:w-1/4 md:h-40 ">
-                  <img
-                    src={items.map_url}
-                    className="w-full h-full object-cover"
-                  />
-                </figure>
-                <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                  <div className="md:pl-7 md:space-y-1 h-full ">
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Ride Id : <span className="text-white">{items.id}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Origin State :{" "}
-                      <span className="text-white">
-                        {items.origin_station_code}
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Station Path :{" "}
-                      <span className="text-white">
-                        {" "}
-                        [
-                        {items.station_path.map((e, i) => {
-                          return (
-                            <span key={i} className="">
-                              {e},&nbsp;
-                            </span>
-                          );
-                        })}
-                        ]{" "}
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Date : <span className="text-white">{items.date}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Distance :{" "}
-                      <span className="text-white">
-                        {items.destination_station_code -
-                          items.origin_station_code}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.city}
-                    </div>
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.state}
-                    </div>
-                  </div>
-                </section>
-              </div>
-            );
-          })}
-        </div>
-      );
-    } else if (tab === 1) {
-      return (
-        <div className="container mx-auto p-4">
-          {upcomingArray.map((items, i) => {
-            if (city !== "" || state !== "") {
-              if (city !== items.city || state !== items.state) {
-                return;
-              }
-            }
-            return (
-              <div
-                key={i}
-                className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-              >
-                <figure className="md:w-1/4 md:h-40 ">
-                  <img
-                    src={items.map_url}
-                    className="w-full h-full object-cover"
-                  />
-                </figure>
-                <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                  <div className="md:pl-7 md:space-y-1 h-full ">
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Ride Id : <span className="text-white">{items.id}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Origin State :{" "}
-                      <span className="text-white">
-                        {items.origin_station_code}
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Station Path :{" "}
-                      <span className="text-white">
-                        <span className="text-white">
-                          {" "}
-                          [
-                          {items.station_path.map((e) => {
-                            return <span className="">{e},&nbsp;</span>;
-                          })}
-                          ]{" "}
-                        </span>
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Date : <span className="text-white">{items.date}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Distance :{" "}
-                      <span className="text-white">
-                        {items.destination_station_code -
-                          items.origin_station_code}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.city}
-                    </div>
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.state}
-                    </div>
-                  </div>
-                </section>
-              </div>
-            );
-          })}
-        </div>
-      );
-    } else if (tab === 2) {
-      return (
-        <div className="container mx-auto p-4">
-          {pastArray.map((items, i) => {
-            if (city !== "" || state !== "") {
-              if (city !== items.city || state !== items.state) {
-                return;
-              } else {
-                console.log(items.city, items.state, "hhj");
-              }
-            }
+  // // Render Cards
+  // const renderCards = () => {
+  //   if (tab === 0) {
+  //     return (
+  //       <div className="container mx-auto p-4">
+  //         {nearestArray.map((items, i) => {
+  //           if (city !== "" || state !== "") {
+  //             if (city !== items.city || state !== items.state) {
+  //               return;
+  //             }
+  //           }
+  //           return (
+  //             <div
+  //               key={i}
+  //               className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
+  //             >
+  //               <figure className="md:w-1/4 md:h-40 ">
+  //                 <img
+  //                   src={items.map_url}
+  //                   className="w-full h-full object-cover"
+  //                 />
+  //               </figure>
+  //               <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
+  //                 <div className="md:pl-7 md:space-y-1 h-full ">
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Ride Id : <span className="text-white">{items.id}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Origin State :{" "}
+  //                     <span className="text-white">
+  //                       {items.origin_station_code}
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Station Path :{" "}
+  //                     <span className="text-white">
+  //                       {" "}
+  //                       [
+  //                       {items.station_path.map((e, i) => {
+  //                         return (
+  //                           <span key={i} className="">
+  //                             {e},&nbsp;
+  //                           </span>
+  //                         );
+  //                       })}
+  //                       ]{" "}
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Date : <span className="text-white">{items.date}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Distance :{" "}
+  //                     <span className="text-white">
+  //                       {items.destination_station_code -
+  //                         items.origin_station_code}
+  //                     </span>
+  //                   </div>
+  //                 </div>
+  //                 <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.city}
+  //                   </div>
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.state}
+  //                   </div>
+  //                 </div>
+  //               </section>
+  //             </div>
+  //           );
+  //         })}
+  //       </div>
+  //     );
+  //   } else if (tab === 1) {
+  //     return (
+  //       <div className="container mx-auto p-4">
+  //         {upcomingArray.map((items, i) => {
+  //           if (city !== "" || state !== "") {
+  //             if (city !== items.city || state !== items.state) {
+  //               return;
+  //             }
+  //           }
+  //           return (
+  //             <div
+  //               key={i}
+  //               className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
+  //             >
+  //               <figure className="md:w-1/4 md:h-40 ">
+  //                 <img
+  //                   src={items.map_url}
+  //                   className="w-full h-full object-cover"
+  //                 />
+  //               </figure>
+  //               <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
+  //                 <div className="md:pl-7 md:space-y-1 h-full ">
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Ride Id : <span className="text-white">{items.id}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Origin State :{" "}
+  //                     <span className="text-white">
+  //                       {items.origin_station_code}
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Station Path :{" "}
+  //                     <span className="text-white">
+  //                       <span className="text-white">
+  //                         {" "}
+  //                         [
+  //                         {items.station_path.map((e) => {
+  //                           return <span className="">{e},&nbsp;</span>;
+  //                         })}
+  //                         ]{" "}
+  //                       </span>
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Date : <span className="text-white">{items.date}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Distance :{" "}
+  //                     <span className="text-white">
+  //                       {items.destination_station_code -
+  //                         items.origin_station_code}
+  //                     </span>
+  //                   </div>
+  //                 </div>
+  //                 <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.city}
+  //                   </div>
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.state}
+  //                   </div>
+  //                 </div>
+  //               </section>
+  //             </div>
+  //           );
+  //         })}
+  //       </div>
+  //     );
+  //   } else if (tab === 2) {
+  //     return (
+  //       <div className="container mx-auto p-4">
+  //         {pastArray.map((items, i) => {
+  //           if (city !== "" || state !== "") {
+  //             if (city !== items.city || state !== items.state) {
+  //               return;
+  //             } else {
+  //               console.log(items.city, items.state, "hhj");
+  //             }
+  //           }
 
-            return (
-              <div
-                key={i}
-                className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
-              >
-                <figure className="md:w-1/4 md:h-40 ">
-                  <img
-                    src={items.map_url}
-                    className="w-full h-full object-cover"
-                  />
-                </figure>
-                <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
-                  <div className="md:pl-7 md:space-y-1 h-full ">
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Ride Id : <span className="text-white">{items.id}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Origin State :{" "}
-                      <span className="text-white">
-                        {items.origin_station_code}
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Station Path :{" "}
-                      <span className="text-white">
-                        <span className="text-white">
-                          {" "}
-                          [
-                          {items.station_path.map((e, i) => {
-                            return (
-                              <span key={i} className="">
-                                {e},&nbsp;
-                              </span>
-                            );
-                          })}
-                          ]{" "}
-                        </span>
-                      </span>
-                    </div>{" "}
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Date : <span className="text-white">{items.date}</span>
-                    </div>
-                    <div className="text-gray-400 tracking-wider font-medium md:text-lg">
-                      Distance :{" "}
-                      <span className="text-white">
-                        {items.destination_station_code -
-                          items.origin_station_code}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.city}
-                    </div>
-                    <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
-                      {items.state}
-                    </div>
-                  </div>
-                </section>
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-  };
+  //           return (
+  //             <div
+  //               key={i}
+  //               className="rounded-md p-4 mb-5 bg-[#171717] flex md:flex-row flex-col items-center"
+  //             >
+  //               <figure className="md:w-1/4 md:h-40 ">
+  //                 <img
+  //                   src={items.map_url}
+  //                   className="w-full h-full object-cover"
+  //                 />
+  //               </figure>
+  //               <section className="flex md:flex-row w-full flex-col-reverse justify-start  items-start md:justify-between md:w-3/4">
+  //                 <div className="md:pl-7 md:space-y-1 h-full ">
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Ride Id : <span className="text-white">{items.id}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Origin State :{" "}
+  //                     <span className="text-white">
+  //                       {items.origin_station_code}
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Station Path :{" "}
+  //                     <span className="text-white">
+  //                       <span className="text-white">
+  //                         {" "}
+  //                         [
+  //                         {items.station_path.map((e, i) => {
+  //                           return (
+  //                             <span key={i} className="">
+  //                               {e},&nbsp;
+  //                             </span>
+  //                           );
+  //                         })}
+  //                         ]{" "}
+  //                       </span>
+  //                     </span>
+  //                   </div>{" "}
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Date : <span className="text-white">{items.date}</span>
+  //                   </div>
+  //                   <div className="text-gray-400 tracking-wider font-medium md:text-lg">
+  //                     Distance :{" "}
+  //                     <span className="text-white">
+  //                       {items.destination_station_code -
+  //                         items.origin_station_code}
+  //                     </span>
+  //                   </div>
+  //                 </div>
+  //                 <div className="flex items-center space-x-2 py-3 md:py-0 md:space-x-4">
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.city}
+  //                   </div>
+  //                   <div className="bg-black text-center p-2 py-1 tracking-wider text-sm rounded-md text-white">
+  //                     {items.state}
+  //                   </div>
+  //                 </div>
+  //               </section>
+  //             </div>
+  //           );
+  //         })}
+  //       </div>
+  //     );
+  //   }
+  // };
 
   return (
     <div>
@@ -398,18 +398,11 @@ export default function Home(props) {
                     );
                   })}
                 </select>
-                {/* Button */}
-                <input
-                  type="submit"
-                  value="Apply"
-                  className="py-1 px-2 bg-black text-white rounded-md tracking-wider w-full"
-                />
               </div>
             </div>
           </div>
         </div>
-        {/* Cards */}
-        {renderCards()}
+        {/* {renderCards()} */}
       </section>
     </div>
   );
